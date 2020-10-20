@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-void daxpy(int N, double a, double *x, restrict double *y);
+void daxpy(int N, double a, double *x, double * restrict y);
 
 int main(int argc, char **argv)
 {
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 }
 
 
-void daxpy(int N, double a, double *x, restrict double *y)
+void daxpy(int N, double a, double *x, double * restrict y)
 {
     #pragma acc parallel loop
     for (int i = 0; i < N; ++i) {
