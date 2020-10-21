@@ -1,0 +1,3 @@
+salloc --partition=gpu
+ssh [node]
+export PGI_ACC_TIME=1
