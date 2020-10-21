@@ -24,6 +24,7 @@ int main(int argc, char **argv)
     int iter = 0;
 
     // Jacobi iteration
+    #pragma acc data copy(A[:dim][:dim]), create(Anew[:dim][:dim])
     while (err > tol && iter < iter_max) { 
         err = 0.0;
     
