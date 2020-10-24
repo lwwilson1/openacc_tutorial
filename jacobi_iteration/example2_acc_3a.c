@@ -8,10 +8,10 @@ int main(int argc, char **argv)
     int iter_max = 1000;
     int dim = 500;
 
-    double ** A = malloc(dim * sizeof(double *));
+    double **A = malloc(dim * sizeof(double *));
     for (int i = 0; i < dim; ++i) A[i] = malloc(dim * sizeof(double));
 
-    double ** Anew = malloc(dim * sizeof(double *));
+    double **Anew = malloc(dim * sizeof(double *));
     for (int i = 0; i < dim; ++i) Anew[i] = malloc(dim * sizeof(double));
 
     for (int i = 0; i < dim; ++i) {
@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     while (err > tol && iter < iter_max) { 
         err = 0.0;
     
-        #pragma acc parallel loop reduction(max:err)
+        #pragma acc parallel loop collapse(2) reduction(max:err)
         for (int i = 1; i < dim-1; ++i) { 
             for (int j = 1; j < dim-1; ++j) {
     
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
             }
         }
     
-        #pragma acc parallel loop
+        #pragma acc parallel loop collapse(2)
         for(int i = 1; i < dim-1; ++i) { 
             for(int j = 1; j < dim-1; ++j) {
                A[i][j] = Anew[i][j];

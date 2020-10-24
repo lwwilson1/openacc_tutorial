@@ -5,8 +5,8 @@
 int main(int argc, char **argv)
 {
     double tol = 1e-5;
-    int iter_max = 1000;
-    int dim = 500;
+    int iter_max = 500;
+    int dim = 1000;
 
     double **A = malloc(dim * sizeof(double *));
     for (int i = 0; i < dim; ++i) A[i] = malloc(dim * sizeof(double));

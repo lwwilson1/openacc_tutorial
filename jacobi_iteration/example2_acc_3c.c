@@ -8,10 +8,10 @@ int main(int argc, char **argv)
     int iter_max = 1000;
     int dim = 500;
 
-    double ** A = malloc(dim * sizeof(double *));
+    double ** restrict A = malloc(dim * sizeof(double *));
     for (int i = 0; i < dim; ++i) A[i] = malloc(dim * sizeof(double));
 
-    double ** Anew = malloc(dim * sizeof(double *));
+    double ** restrict Anew = malloc(dim * sizeof(double *));
     for (int i = 0; i < dim; ++i) Anew[i] = malloc(dim * sizeof(double));
 
     for (int i = 0; i < dim; ++i) {
@@ -31,6 +31,7 @@ int main(int argc, char **argv)
     
         #pragma acc parallel loop reduction(max:err)
         for (int i = 1; i < dim-1; ++i) { 
+//            #pragma acc loop independent
             for (int j = 1; j < dim-1; ++j) {
     
                 Anew[i][j] = 0.25 * (A[i][j+1] + A[i][j-1] 
@@ -42,6 +43,7 @@ int main(int argc, char **argv)
     
         #pragma acc parallel loop
         for(int i = 1; i < dim-1; ++i) { 
+//            #pragma acc loop independent
             for(int j = 1; j < dim-1; ++j) {
                A[i][j] = Anew[i][j];
             }
