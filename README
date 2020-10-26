@@ -1,3 +1,12 @@
-salloc --partition=gpu
+salloc --partition=gpu --gres=gpu:1
 ssh [node]
+module load pgi/20.7
+
+For profiling information:
 export PGI_ACC_TIME=1
+
+Compiling C code:
+nvc -acc -Minfo <source files>
+
+Compiling C++11 code:
+nvc++ -acc -Minfo -std=c++11 <source files>

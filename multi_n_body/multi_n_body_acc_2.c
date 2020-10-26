@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-void copy_array_into_device(double * restrict x, int dim);
-
 void compute_potential(double * restrict x, double * restrict y,
         double * restrict z, double * restrict q,
         double * restrict potential, int dim, double alpha);
@@ -13,7 +11,7 @@ double pot_fun(double dx, double dy, double dz, double q, double alpha);
 int main(int argc, char **argv)
 {
     int dim = 10000;
-    int num_potentials = 100;
+    int num_potentials = 20;
 
     double * restrict x = malloc(dim * sizeof(double));
     double * restrict y = malloc(dim * sizeof(double));
